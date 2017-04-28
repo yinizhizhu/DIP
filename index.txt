@@ -1,0 +1,11 @@
+version		#check out the version of MATLAB
+doc	format	#get the details for 'format'
+clear		#clean the work space
+clc		#clean the command window
+clf		#clean the graphic window
+lookfor	edge	#get the all the H1 of key which is related to the 'edge'
+who		#show all the variables in currency
+whos		#show the variable and its details
+save	filename	variable_list	#
+load	filename	variablename	#
+disp	variablename	#
