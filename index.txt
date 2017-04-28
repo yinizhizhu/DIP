@@ -1,3 +1,4 @@
+#(x, y) start with (0, 0) while (r, c) with (1, 1)
 version		#check out the version of MATLAB
 doc	format	#get the details for 'format'
 clear		#clean the work space
