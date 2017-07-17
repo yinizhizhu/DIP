@@ -1,12 +1,24 @@
 #(x, y) start with (0, 0) while (r, c) with (1, 1)
 version		#check out the version of MATLAB
-doc	format	#get the details for 'format'
 clear		#clean the work space
 clc		#clean the command window
 clf		#clean the graphic window
 lookfor	edge	#get the all the H1 of key which is related to the 'edge'
+save	filename	variable_list	#保存变量到指定文件
+load	filename	variablename	#加载指定文件的变量
+disp	variablename	#
+exit\quit	#退出matlab
+hold	#图形保持开关
+path	#显示搜索目录
+[]	#定义矩阵
+{}	#定义单元数组
+
+#另类命令
+Shift + Enter 	#控制台中回车换行不执行
+
+#查询帮助
+doc	format	#get the details for 'format'
 who		#show all the variables in currency
 whos		#show the variable and its details
-save	filename	variable_list	#
-load	filename	variablename	#
-disp	variablename	#
+demo	#运行MATLAB演示程序
+which	#显示指定函数或文件的路径
