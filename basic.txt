@@ -1,0 +1,90 @@
+#数据类型
+数值: int, float, plurality(复数), Inf(正无穷, -Inf负无穷), NaN(Not a Number, 表示一个既不是实数又不是复数的数值)
+复数: a = 5+10i(j); x = 5; y = 10; z = complex(x, y);
+
+逻辑: true, false(logical())
+
+字符|字符串: str = 'We are the world!'; str = char([65 66])
+
+结构体: strArray = struct('name', 'a', 'len', 5); #通过'.'对数值域进行访问
+
+#矩阵基本操作
+##矩阵构造:
+	简单矩阵构造([]构造m*n的矩阵)
+	特殊矩阵构造：
+		ones - 2 - 产生矩阵元素全是1的矩阵
+			ones(n): n*n, ones(m, n): m*n
+		zeros - 2 - 产生矩阵元素全是0的矩阵
+		eye - 1 - 产生单位矩阵
+		diag - 1 - 将向量转化为对角矩阵
+		magic - 1 - 产生魔方矩阵，即每行每列之和相等的矩阵
+		rand - 2 - 产生0-1均匀分布的随机数
+		randn - 2 - 产生均值为0且方差为1的高斯分布随机数
+		randperm - 1 - 产生整数1~n的随机排列
+
+##向量构造：
+	最简单的是用向量构造符':':
+		a:b,返回以a为起点，以1为步长，且所有取值在a与b之间的向量	a:s:b返回以a为起点，以s为步长，且所有取值在a与b之间的向量
+	还可以使用函数linespace(),logspace()等来构造向量，其中linespace用于创建指定范围和长度的等距向量：
+		a=linespace(-6, 6, 4)（运行结果是：-6 -2 2 6）
+
+##矩阵大小的改变
+	矩阵合并：
+		C=[A B], 水平方向合并矩阵(cat(2,A,B), horzcat(A,B))
+		C=[A;B], 竖直方向合并矩阵(cat(1,A,B),vertcat(A,B))
+		(repmat(A,M,N)得到M*N块矩阵，其中每块都是A；blkdiag(A,B)得到以矩阵A和B为对角块的矩阵)
+	矩阵行列的删除：
+		A=magic(3); A(2,:) = [];
+
+##获取矩阵信息：
+	size:矩阵各方向长度
+	length：矩阵个方向中最大值
+	ndims：矩阵的维数
+	numel：矩阵的元素个数
+	class：返回数据的数据类型
+	isa(obj, 'class_name')：判断释放后为class_name的类型
+	ischar(float,integer,logical,numeric,real,struct)：判断是否字符串类型(...)
+	isempty：判断矩阵是否为空矩阵
+	isscalar：判断矩阵是否为标量
+	issparse：判断矩阵是否为稀疏矩阵
+	isvector：是否为矢量
+
+##矩阵结构的改变：
+	reshape(A,m,n):把A重新排列为m*n的矩阵
+	rot90(A), rot90(A,k):逆时针旋转90度，逆时针旋转k*90度
+	fliplr：以竖直方向为轴做镜像（flipdim(A,2)）
+	flipud：以水平方向为轴做镜像（flipdim(A,1)）
+	transpose:矩阵的转秩
+	ctranspose:矩阵的共轭转秩
+
+#稀疏矩阵：
+	sparse：将满矩阵转换到稀疏矩阵
+	full：将稀疏矩阵转换到满矩阵
+	speye(n)：创建n*n单位稀疏矩阵
+	spones(S):将稀疏矩阵的非零元素改为1
+	sprand(S):将S的非零元素改为均匀分布的随机数
+	sprand(m, n, density):创建m*n的随机稀疏矩阵
+	sprandn(s):将稀疏矩阵S的非零元素改为高斯分布的随机数
+	sprandn(m,n,density)：创建m*n的随机稀疏矩阵
+	nnz(S):返回非零值的个数
+	nonzeros(A):返回非零值
+	nzmax(S):返回用于存储非零值的空间长度
+	spy(x):显示稀疏矩阵的非零值的分布
+	+,-,.*,./,.\,.^,.',*,/,\,^,'
+	<,>,~=,<=,>=,==
+	&,|,~,xor
+	bitand,bitor,bitcmp,bitxor
+
+#字符串：
+	strcmp(s1, s2):相等返回1
+	strncmp(s1, s2, N):如果钱N个字符相同返回1
+	strcmpi(s1, s2):忽略字符串大小写，如果字符串相等返回1
+	strncmpi(s1, s2, N)：忽略字符串大小写，如果前N个字符串相等返回1
+	strrep(str1, str2, str3):str1中的str2字符串换成str3
+	findstr(str1, str2)：查找输入中较长字符串中较短字符串的位置
+	strfind(str, pattern):查找str中pattern出现的位置
+	[token rem] = strtok(str, delimiter):以delimiter为分隔符（省略后默认为空格）
+	strmatch(str, STRS)：在STRS中从头开始匹配str，返回所在行数
+	char,int2str,num2str,dec2hex,dec2bin,dec2base,double,str2num,str2double,hex2dec,bin2dec,base2dec
+
+154页

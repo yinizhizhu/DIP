@@ -1,0 +1,38 @@
+#数学运算
+##矩阵运算
+	矩阵分析：
+		norm：向量和矩阵的距离度量（范数）
+		rank：矩阵的秩（cond(A)判断A是否为行列式为0的奇异矩阵）
+		det：矩阵的行列式
+		trace：矩阵的迹
+		null：化零空间
+		orth：正交空间（正交基矩阵）
+		rref：矩阵的简化梯形形式
+		subspace：两个子空间的角度
+	线性方程组：
+		inv(A):A的逆矩阵
+	矩阵分解：
+		chol：矩阵Cholesky分解，把对称正定矩阵A表示为上三角矩阵R的转置和本身的乘积，即A=RTR
+		cholinc：稀疏矩阵的不完全Cholesky分解
+		lu：矩阵LU分解，将任意一个方正A分解为一个交换下三角矩阵L（为下三角矩阵经行变换的结果）和一个上三角矩阵U的乘积，即A= LU
+		luinc：稀疏矩阵的不完全LU分解
+		qr：矩阵QR分解
+		svd：矩阵奇异值分解
+		schur：矩阵Schur分解
+	矩阵的特征值和特征向量：[V,D]=eig(A),返回A的特征值和特征向量
+	矩阵相似变换：
+	非线性运算：
+		指数：expm
+		对数：logm
+		开方：sqrtm
+		通用：funm
+
+
+##矩阵元素运算
+	三角函数：sin,sind(度),sinh,asin,asind,asinh,cos,sec,secd,sech,asec,asecd,asech,csc...
+	指数和对数函数：exp,expml,log,loglp,log10,log2,pow2,realpow,realog,realsqrt,sqrt,nthroot,nextpow2
+	复数函数:abs,real,angle,unwrap,complex,isreal,conj,cplxpair,imag
+	截断和求余函数:fix,mod,floor,rem,ceil,sign,round
+	特殊函数:工程函数，数论函数，坐标变换函数
+
+245页
