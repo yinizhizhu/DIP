@@ -1,0 +1,26 @@
+#MATLAB采用行向量表示多项式系数，多项式系数按降幂排列
+
+#poly2str()将多项式系数向量转换为完整形式：[s len] = poly2str(A, 'x')
+
+#polyval()计算多项式的值：polyval(p, x)（x是带入的值）,polyvalm(p, X)（矩阵X带入的值）
+
+#多项式运算
+conv(多项式乘法),deconv(多项式除法),poly(求多项式的系数),polyfit(多项式曲线拟合)
+polyder(求多项式的一阶导数)：k=polyder(p),k=polyder(a,b)（返回a b乘积微分的系数向量）,[q,d]=polyder(b,a)（返回多项式b/a微分的系数向量）
+polyint(求多项式的积分),polyvar(求多项式的值),polyvarm(求矩阵多项式的值),residue(部分分式展开),roots(求多项式的根，poly(r)返回值为r的系数向量)
+
+#插值运算：根据已知输入/输出数据集和当前输入估计输出值。
+
+#数据分析：最大值max、最小值min、平均值mean、中间值median、元素求和sum、标准差std、方差var、元素排序sort、求元素的连乘积prod、话直方图hist、直方图统计histc、梯形数值积分trapz、矩阵累加cumsum、矩阵的累积cumprod、梯形积分累计cumtrapz、协方差矩阵cov、变量相关系数矩阵corrcoef、计算差分diff、计算梯度gradient、
+
+#信号滤波和卷积
+一维数字滤波filter、信号卷积conv、去除信号直流或线性成分detrend、
+
+#离散傅里叶变换（傅里叶变换可以对连续信号进行变换，此处为离散的）：一维fft（逆变换ifft）、二维fft2（逆变换ifft2）
+
+#功能函数：
+函数画图fplot、二维函数画图ezplot、三维函数画图ezplot3、极坐标画图ezpolar、等高线画图ezcontour、三维网格画图ezmesh、混合网格和等高线画图ezmeshc、三维彩色表面画图ezsurf、混合表面和等高线画图ezsurfc
+求医院函数在给定区间内的最小值fminbnd、求多元函数在给定附近的局部最小值fminsearch、求一元函数的零点fzero、
+一元函数的数值积分quad（采用自适应Simpson方法）quadl（采用自适应Lobatto方法）、一元函数的矢量数值积分（quadv）、二重积分dblquad、三重积分triplequad
+
+#微分方程组数值解：常微分方程组的初值问题、延迟微分方程的问题、常微分方程组的边界问题
