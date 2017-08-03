@@ -1,6 +1,7 @@
 function new = getNew( fileIn, w )
-%GETNEW 此处显示有关此函数的摘要
-%   此处显示详细说明
+%GETNEW(fileIn, w), return 'new' for the result of compression
+%   fileIn - the filename inputed
+%   w - the Generating Kernel
 
 I = imread(fileIn);
 subplot(1,2,1);

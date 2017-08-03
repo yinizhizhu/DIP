@@ -1,5 +1,5 @@
 function reduce(fileIn, fileOut, a)
-%reduce the image with Laplacian Praymid operator
+%reduce(fileIn, fileOut, a) the image with Laplacian Praymid operator
 %   fileIn - the filename which is original Image
 %   fileOut - the filename which stores the result of compression
 %   a - the basic value for computation

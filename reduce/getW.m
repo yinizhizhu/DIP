@@ -1,5 +1,5 @@
 function w = getW(a)
-%GETW calculate the Generating Kernel
+%getW(a), calculate the Generating Kernel 'w'
 %   w - the Generating Kernel
 %   weight - the basic weighting function
 %   a - the parameter which is basic value for computing
