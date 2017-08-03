@@ -13,6 +13,10 @@ path	#显示搜索目录
 []	#定义矩阵
 {}	#定义单元数组
 
+I = imread('s0.jpg');
+imshow(I);
+imwrite(I, 's1.jpg', 'jpg');
+
 #另类命令
 Shift + Enter 	#控制台中回车换行不执行
 
