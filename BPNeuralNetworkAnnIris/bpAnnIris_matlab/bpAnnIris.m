@@ -15,10 +15,10 @@ end
 net = newff( minmax(input) , [10 3] , { 'logsig' 'purelin' } , 'traingdx' ) ; 
 
 %设置训练参数
-net.trainparam.show = 50 ;
-net.trainparam.epochs = 500 ;
-net.trainparam.goal = 0.01 ;
-net.trainParam.lr = 0.01 ;
+net.trainparam.show = 50 ;      %显示中间结果的周期
+net.trainparam.epochs = 500 ;   %最大迭代次数
+net.trainparam.goal = 0.01 ;    %神经网络训练的目标误差
+net.trainParam.lr = 0.01 ;      %学习率
 
 %开始训练
 net = train( net, input , output' ) ;
