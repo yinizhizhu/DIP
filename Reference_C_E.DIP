@@ -47,7 +47,7 @@ Geometric correction 几何校正 采用几何变换消除几何畸变的一种�
 Gray level 灰度级 （1）和数字图像的像素相关连的值，它表示由该像素的原始景物点的亮度；（2）在某像素位置对图像的局部性质的数字化度量。 
 Gray scale 灰度 在数字图像中所有可能灰度级的集合。 
 Gray-scale transformation 灰度变换 在点运算中的一种函数，它建立了输入灰度和对应输出灰度的关系。 
-Hankel transform   Hankel变换。 
+Hankel transform   Hankel变换。 
 Harmonic signal 谐波信号 由余弦实部和相同频率的正弦虚部组合的复数信号。 
 Hermite function Hermite函数 具有偶实部和奇虚部的复值函数。 
 High-pass filtering 高通滤波 图像增强（通常是卷积）运算，相对于低频部分它对高频部分进行了提升。 
@@ -98,13 +98,13 @@ Registered 配准的 （l）调准的状态；（2）两幅或多幅图像已几
 Registered image 已配准图像 同一景物的两幅（或以上）图像已相互调准好位置，从而使其中的物体具有相同的图像位置。 
 Resolution 分辨率 （l）在光学中指可分辨的点物体之间最小的分离距离；（2）在图像处理中，指图像中相邻的点物体能够被分辨出的程度。 
 Run 行程 在图像编码中，具有相同灰度的相连像素序列。 
-Run length 行程长度，行程   在行程中像素的个数。 
+Run length 行程长度，行程   在行程中像素的个数。 
 Run-length encoding 行程编码 图像行以行程列表示的图像压缩技术，每个行程由一个给定的行程长度和灰度值定义。 
 Sampling 采样 （根据采样网格）将图像分为象素并测量其上局部特性（如亮度、颜色）的过程。 
 Scene 场景 客观物体的一种特色布局。 
 Sharp 清晰 关于图像细节的易分辨性。 
 Sharpening 锐化 用以增强图像细节的一种图像处理技术。 
-Sigmoid function   Sigmoid函数，S函数   形如“S”的一种函数，是一种灰度变化函数，它也可用于神经元网络中处理单元（PE）中的函数。 
+Sigmoid function   Sigmoid函数，S函数   形如“S”的一种函数，是一种灰度变化函数，它也可用于神经元网络中处理单元（PE）中的函数。 
 Sinusoidal 正弦型的 具有正弦函数形状的函数类型。 
 Smoothing 平滑 降低图像细节幅度的一种图像处理技术。通常用于降噪。 
 Statistical Pattern recognition 统计模式识别 采用概率和统计的方法将物体赋予模式类的一种模式识别。 
@@ -116,8 +116,8 @@ Thinning 细化 将物体削减为（单像素宽度）的细曲线的一种二�
 Threshold 阈值 用以产生二值图像的一个特定的灰度纹。 
 Thresholding 二值化 由灰度图产生二值图像的过程，如果输入像素的灰度值大于给定的阈值则输出象素赋为1，否则赋为0。 
 Transfer function 传递函数 在线性移不变系统中，表达每一频率下的正弦型输入信号将幅值比例传递到输出信号上的频率函数。
- 
-图像处理软件词汇   
+ 
+图像处理软件词汇   
 FFT 滤波器 FFT filters 
 VGA 调色板和许多其他参数 VGA palette and many others 
 按名称排序 sort by name 
