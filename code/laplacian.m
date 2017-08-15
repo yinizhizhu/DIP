@@ -16,19 +16,25 @@ end
 w2(2,2) = -8;
 
 f = imread(filename);
-subplot(1,3,1);
+subplot(3,2,1);
 imshow(f);
 fprintf('Start...\n');
 
 f = double(f);
 
-g1 = f-delta(f,w1);
-subplot(1,3,2);
+deltaf1 = delta(f, w1);
+g1 = f-deltaf1;
+subplot(3,2,3);
+imshow(uint8(deltaf1));
+subplot(3,2,4);
 imshow(uint8(g1));
 fprintf('Try another one...\n');
 
-g2 = f-delta(f,w2);
-subplot(1,3,3);
+deltaf2 = delta(f, w2);
+g2 = f-deltaf2;
+subplot(3,2,5);
+imshow(uint8(deltaf2));
+subplot(3,2,6);
 imshow(uint8(g2));
 fprintf('Done!\n');
 end
