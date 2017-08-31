@@ -1,0 +1,20 @@
+figure('Name','显示处理结果');
+figure('Position',[600, 300, 300, 200]);
+
+二、用法举例
+
+1、在同一个figure中显示多个contour，可通过“hold on” 来实现：
+a = ones(500,500);
+figure('name','叠加显示图像');
+b = a;
+b(10:500-10,10:500-10) = 0;
+contour(b,[0 0],'r');
+hold on;
+c = a;
+c(100:400,100:400) = 0;   
+contour(c,[0 0],'b');
+hold off;
+
+2、figure 默认的坐标原点在左下角，这会导致有些图形图像的显示出现上下翻转，这时可通过：set(gca,'ydir','reverse','xaxislocation','top'); % 将坐标原点设在左上角
+
+3、指定坐标轴显示的坐标范围：xlim([xmin xmax])
