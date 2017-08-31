@@ -1,0 +1,76 @@
+2. 使用struct函数创建结构
+使用struct函数也可以创建结构，该函数产生或吧其他形式的数据转换为结构数组。
+struct的使用格式为：
+s = sturct('field1',values1,'field2',values2,…);//注意引号
+该函数将生成一个具有指定字段名和相应数据的结构数组，其包含的数据values1、valuese2等必须为具有相同维数的数据，数据的存放位置域其他结构位置一一对应的。对于struct的赋值用到了元胞数组。数组values1、values2等可以是元胞数组、标量元胞单元或者单个数值。每个values的数据被赋值给相应的field字段。
+当valuesx为元胞数组的时候，生成的结构数组的维数与元胞数组的维数相同。而在数据中不包含元胞的时候，得到的结构数组的维数是1×1的。例如：
+s = struct('type',{'big','little'},'color',{'blue','red'},'x',{3,4})
+s =
+1x2 struct array with fields:
+type
+color
+x
+得到维数为1×2的结构数组s，包含了type、color和x共3个字段。这是因为在struct函数中{'big','little'}、{'blue','red'}和{3,4}都是1×2的元胞数组，可以看到两个数据成分分别为：
+s(1,1)
+ans =
+type: 'big'
+color: 'blue'
+x: 3
+   s(1,2)
+ans =
+type: 'little'
+color: 'red'
+x: 4
+相应的，如果将struct函数写成下面的形式：
+s = struct('type',{'big';'little'},'color',{'blue';'red'},'x',{3;4})
+s =
+2x1 struct array with fields:
+type
+color
+x
+则会得到一个2×1的结构数组。
+下面给出利用struct构建结构数组的具体实例。
+【例4.3.1-3】利用函数struct，建立温室群的数据库。
+（1） struct预建立空结构数组方法之一
+a = cell(2,3); % 创建2×3的元胞数组
+green_house_1=struct('name',a,'volume',a,'parameter',a(1,2))
+green_house_1 =
+2x3 struct array with fields:
+name
+volume
+parameter
+（2）struct预建空结构数组方法之二
+green_house_2=struct('name',a,'volume',[],'parameter',[])    
+green_house_2 =
+2x3 struct array with fields:
+name
+volume
+parameter
+（3）struct预建空结构数组方法之三
+green_hopuse_3(2,3)=struct('name',[],'volume',[],'parameter',[])
+green_hopuse_3 =
+2x3 struct array with fields:
+name
+volume
+parameter
+（4）struct创建结构数组方法之四
+a1={'六号房'};a2={'3200立方米'};
+green_house_4(2,3)=struct('name',a1,'volume',a2,'parameter',[]);
+T6=[31.2,30.4,31.6,28.7;29.7,31.1,30.9,29.6];             green_house_4(2,3).parameter.temperature=T6;            
+green_house_4
+ans =
+2x3 struct array with fields:
+name
+volume
+parameter
+
+4. 3.2 结构数组的操作
+
+MATLAB中专门用于对结构数组的操作的函数并不多，通过 help datatypes获取数据类型列表，可以看到其中的结构数据类型的有关的函数，主要如表4.3.1所示。
+表4.3.1 结构数组的操作函数
+函数名   功能描述   函数名   功能描述
+deal把输入处理成输出   fieldnames   获取结构的字段名
+getfield   获取结构中指定字段的值   rmfield   删除结构的字段(不是字段内容)
+setfield   设置结构数组中指定的字段的值   struct   创建结构数组
+struct2cell   结构数组转化成元胞数组   isfield   判断是否存在该字段
+isstruct   判断某变量是否是结构类型
