@@ -1,0 +1,240 @@
+Matlab中插值函数汇总和使用说明
+本文来自: MATLAB爱好者论坛 作者: admin 日期: 2009-5-31 12:29 阅读: 3783 人 打印 收藏 
+Matlab, 插值, 函数, 汇总
+命令1 interp1
+功能 一维数据插值（表格查找）。该命令对数据点之间计算内插值。它找出一元函数f(x)在中间点的数值。其中函数f(x)由所给数据决定。
+x：原始数据点
+Y：原始数据点
+xi：插值点
+Yi：插值点
+格式
+(1)yi = interp1(x,Y,xi) 
+返回插值向量yi，每一元素对应于参量xi，同时由向量x 与Y 的内插值决定。参量x 指定数据Y 的点。
+若Y 为一矩阵，则按Y 的每列计算。yi 是阶数为length(xi)*size(Y,2)的输出矩阵。
+(2)yi = interp1(Y,xi) 
+假定x=1:N，其中N 为向量Y 的长度，或者为矩阵Y 的行数。
+(3)yi = interp1(x,Y,xi,method) 
+用指定的算法计算插值：
+’nearest’：最近邻点插值，直接完成计算；
+’linear’：线性插值（缺省方式），直接完成计算；
+’spline’：三次样条函数插值。对于该方法，命令interp1 调用函数spline、ppval、mkpp、umkpp。这些命令生成一系列用于分段多项式操作的函数。命令spline 用它们执行三次样条函数插值；
+’pchip’：分段三次Hermite 插值。对于该方法，命令interp1 调用函数pchip，用于对向量x 与y 执行分段三次内插值。该方法保留单调性与数据的外形；
+’cubic’：与’pchip’操作相同；
+’v5cubic’：在MATLAB 5.0 中的三次插值。
+对于超出x 范围的xi 的分量，使用方法’nearest’、’linear’、’v5cubic’的插值算法，相应地将返回NaN。对其他的方法，interp1 将对超出的分量执行外插值算法。
+(4)yi = interp1(x,Y,xi,method,'extrap') 
+对于超出x 范围的xi 中的分量将执行特殊的外插值法extrap。
+(5)yi = interp1(x,Y,xi,method,extrapval) 
+确定超出x 范围的xi 中的分量的外插值extrapval，其值通常取NaN 或0。
+例1 
+1.	
+2.	>>x = 0:10; y = x.*sin(x);
+3.	>>xx = 0:.25:10; yy = interp1(x,y,xx);
+4.	>>plot(x,y,'kd',xx,yy)
+复制代码
+例2 
+1.	
+2.	>> year = 1900:10:2010;
+3.	>> product = [75.995 91.972 105.711 123.203 131.669 150.697 179.323 203.212 226.505
+4.	249.633 256.344 267.893 ];
+5.	>>p1995 = interp1(year,product,1995)
+6.	>>x = 1900:1:2010;
+7.	>>y = interp1(year,product,x,'pchip');
+8.	>>plot(year,product,'o',x,y)
+复制代码
+插值结果为： 
+1.	
+2.	p1995 =
+3.	252.9885
+复制代码
+命令2 interp2
+功能 二维数据内插值（表格查找）
+格式 
+(1)ZI = interp2(X,Y,Z,XI,YI) 
+返回矩阵ZI，其元素包含对应于参量XI 与YI（可以是向量、或同型矩阵） 的元素， 即Zi(i,j) ←[Xi(i,j),yi(i,j)]。用户可以输入行向量和列向量Xi 与Yi，此时，输出向量Zi 与矩阵meshgrid(xi,yi)是同型的。同时取决于由输入矩阵X、Y 与Z 确定的二维函数Z=f(X,Y)。参量X 与Y 必须是单调的，且相同的划分格式，就像由命令meshgrid 生成的一样。若Xi与Yi 中有在X 与Y范围之外的点，则相应地返回nan（Not a Number）。
+(2)ZI = interp2(Z,XI,YI) 
+缺省地，X=1:n、Y=1:m，其中[m,n]=size(Z)。再按第一种情形进行计算。
+(3)ZI = interp2(Z,n) 
+作n 次递归计算，在Z 的每两个元素之间插入它们的二维插值，这样，Z 的阶数将不断增加。interp2(Z)等价于interp2(z,1)。
+(4)ZI = interp2(X,Y,Z,XI,YI,method) 
+用指定的算法method 计算二维插值：
+’linear’：双线性插值算法（缺省算法）；
+’nearest’：最临近插值；
+’spline’：三次样条插值；
+’cubic’：双三次插值。
+
+例3： 
+1.	
+2.	>>[X,Y] = meshgrid(-3:.25:3);
+3.	>>Z = peaks(X,Y);
+4.	>>[XI,YI] = meshgrid(-3:.125:3);
+5.	>>ZZ = interp2(X,Y,Z,XI,YI);
+6.	>>surfl(X,Y,Z);hold on;
+7.	>>surfl(XI,YI,ZZ+15)
+8.	>>axis([-3 3 -3 3 -5 20]);shading flat
+9.	>>hold off
+复制代码
+例4： 
+1.	
+2.	>>years = 1950:10:1990;
+3.	>>service = 10:10:30;
+4.	>>wage = [150.697 199.592 187.625
+5.	179.323 195.072 250.287
+6.	203.212 179.092 322.767
+7.	226.505 153.706 426.730
+8.	249.633 120.281 598.243];
+9.	>>w = interp2(service,years,wage,15,1975)
+复制代码
+插值结果为： 
+1.	
+2.	w =
+3.	190.6288
+复制代码
+命令3 interp3
+功能 三维数据插值（查表）
+格式 
+(1)VI = interp3(X,Y,Z,V,XI,YI,ZI) 
+找出由参量X,Y,Z决定的三元函数V=V(X,Y,Z)在点（XI,YI,ZI）的值。参量XI,YI,ZI 是同型阵列或向量。若向量参量XI,YI,ZI 是不同长度，不同方向（行或列）的向量，这时输出参量VI 与Y1,Y2,Y3 为同型矩阵。其中Y1,Y2,Y3 为用命令meshgrid(XI,YI,ZI)生成的同型阵列。若插值点(XI,YI,ZI)中有位于点(X,Y,Z)之外的点，则相应地返回特殊变量值NaN。
+(2)VI = interp3(V,XI,YI,ZI) 
+缺省地， X=1:N ，Y=1:M， Z=1：P ，其中，[M,N,P]=size(V)，再按上面的情形计算。
+(3)VI = interp3(V,n) 
+作n 次递归计算，在V 的每两个元素之间插入它们的三维插值。这样，V 的阶数将不断增加。interp3(V)等价于interp3(V,1)。
+(4)VI = interp3(......,method) %用指定的算法method 作插值计算：
+‘linear’：线性插值（缺省算法）；
+‘cubic’：三次插值；
+‘spline’：三次样条插值；
+‘nearest’：最邻近插值。
+说明 在所有的算法中，都要求X,Y,Z 是单调且有相同的格点形式。当X,Y,Z 是等距且单调时，用算法’*linear’，’*cubic’，’*nearest’，可得到快速插值。
+
+例5 
+1.	
+2.	>>[x,y,z,v] = flow(20);
+3.	>>[xx,yy,zz] = meshgrid(.1:.25:10, -3:.25:3, -3:.25:3);
+4.	>>vv = interp3(x,y,z,v,xx,yy,zz);
+5.	>>slice(xx,yy,zz,vv,[6 9.5],[1 2],[-2 .2]); shading interp;colormap cool
+复制代码
+命令4 interpft
+功能 用快速Fourier 算法作一维插值
+格式 
+(1)y = interpft(x,n) 
+返回包含周期函数x 在重采样的n 个等距的点的插值y。若length(x)=m，且x 有采样间隔dx，则新的y 的采样间隔dy=dx*m/n。注意的是必须n≥m。若x 为一矩阵，则按x 的列进行计算。返回的矩阵y 有与x 相同的列数，但有n 行。
+(2)y = interpft(x,n,dim) 
+沿着指定的方向dim 进行计算
+
+命令5 griddata
+功能 数据格点
+格式 
+(1)ZI = griddata(x,y,z,XI,YI) 
+用二元函数z=f(x,y)的曲面拟合有不规则的数据向量x,y,z。griddata 将返回曲面z 在点（XI,YI）处的插值。曲面总是经过这些数据点（x,y,z）的。输入参量（XI,YI）通常是规则的格点（像用命令meshgrid 生成的一样）。XI 可以是一行向量，这时XI 指定一有常数列向量的矩阵。类似地，YI 可以是一列向量，它指定一有常数行向量的矩阵。
+(2)[XI,YI,ZI] = griddata(x,y,z,xi,yi) 
+返回的矩阵ZI 含义同上，同时，返回的矩阵XI,YI 是由行向量xi 与列向量yi 用命令meshgrid 生成的。
+(3)[XI,YI,ZI] = griddata(.......,method) 
+用指定的算法method 计算：
+‘linear’：基于三角形的线性插值（缺省算法）；
+‘cubic’： 基于三角形的三次插值；
+‘nearest’：最邻近插值法；
+‘v4’：MATLAB 4 中的griddata 算法。
+
+命令6 spline
+功能 三次样条数据插值
+格式 
+(1)yy = spline(x,y,xx) 
+对于给定的离散的测量数据x,y（称为断点），要寻找一个三项多项式y = p(x) ，以逼近每对数据(x,y)点间的曲线。过两点(xi, yi) 和(xi+1, yi+1) 只能确定一条直线，而通过一点的三次多项式曲线有无穷多条。为使通过中间断点的三次多项式曲线具有唯一性，要增加两个条件（因为三次多项式有4 个系数）：
+a．三次多项式在点(xi, yi) 处有： p&cent;i(xi) = p&cent;i(xi) ；
+b．三次多项式在点(xi+1, yi+1) 处有： p&cent;i(xi+1) = pi&cent;(xi+1) ；
+c．p(x)在点(xi, yi) 处的斜率是连续的（为了使三次多项式具有良好的解析性，加上的条件）；
+d．p(x)在点(xi, yi) 处的曲率是连续的；
+对于第一个和最后一个多项式，人为地规定如下条件：
+①． p&cent;1&cent;(x) = p&cent;2&cent;(x)
+②． p&cent;n&cent;(x) = p&cent;n&cent;-1(x)
+上述两个条件称为非结点(not-a-knot)条件。综合上述内容，可知对数据拟合的三次样条函数p(x)是一个分段的三次多项式：
+&iuml; &iuml;&icirc;
+&iuml; &iuml;í
+ì
+&pound; &pound;
+&pound; &pound;
+&pound; &pound;
+=
+n n n+1
+2 2 3
+1 1 2
+p (x) x x x
+p (x) x x x
+p (x) x x x
+p(x)
+L L L L
+其中每段pi(x) 都是三次多项式。
+该命令用三次样条插值计算出由向量x 与y 确定的一元函数y=f(x)在点xx 处的值。若参量y 是一矩阵，则以y 的每一列和x 配对，再分别计算由它们确定的函数在点xx 处的值。则yy 是一阶数为length(xx)*size(y,2)的矩阵。
+(2)pp = spline(x,y) 
+返回由向量x 与y 确定的分段样条多项式的系数矩阵pp，它可用于命令ppval、unmkpp 的计算。
+
+例6
+对离散地分布在y=exp(x)sin(x)函数曲线上的数据点进行样条插值计算： 
+1.	
+2.	>>x = [0 2 4 5 8 12 12.8 17.2 19.9 20]; y = exp(x).*sin(x);
+3.	>>xx = 0:.25:20;
+4.	>>yy = spline(x,y,xx);
+5.	>>plot(x,y,'o',xx,yy)
+复制代码
+命令7 interpn
+功能 n 维数据插值（查表）
+格式 
+(1)VI = interpn(X1,X2,,,Xn,V,Y1,Y2,⋯,Yn) %返回由参量X1,X2,…,Xn,V 确定的n 元函数V=V(X1,X2,…,Xn)在点（Y1,Y2,…,Yn）处的插值。参量Y1,Y2,…,Yn 是同型的矩阵或向量。若Y1,Y2,…,Yn 是向量，则可以
+是不同长度，不同方向（行或列）的向量。它们将通过命令ndgrid生成同型的矩阵， 再作计算。若点(Y1,Y2,…,Yn) 中有位于点（X1,X2,…,Xn）之外的点，则相应地返回特殊变量NaN。
+VI = interpn(V,Y1,Y2,⋯,Yn) %缺省地，X1=1:size(V,1)，X2=1:size(V,2)，… ，
+Xn=1:size(V,n)，再按上面的情形计算。
+VI = interpn(V,ntimes) %作ntimes 次递归计算，在V 的每两个元素之间插入它们的n 维插值。这样，V 的阶数将不断增加。interpn(V)
+等价于interpn(V, 1)。
+VI = interpn(⋯,method) %用指定的算法method 计算：
+‘linear’：线性插值（缺省算法）；
+‘cubic’：三次插值；
+‘spline’：三次样条插值法；
+‘nearest’：最邻近插值算法。
+
+命令8 meshgrid
+功能 生成用于画三维图形的矩阵数据。
+格式 [X,Y] = meshgrid(x,y) 将由向量x，y（可以是不同方向的）指定的区域[min(x)，max(x) ， min(y) ， max(y)] 用直线x=x(i),y=y(j) （ i=1,2,…,length(x) ，j=1,2,…,length(y)）进行划分。这样，得到了length(x)*length(y)个点，
+这些点的横坐标用矩阵X 表示，X 的每个行向量与向量x 相同；这些点的纵坐标用矩阵Y 表示，Y 的每个列向量与向量y 相同。其中X,Y可用于计算二元函数z=f(x,y)与三维图形中xy 平面矩形定义域的划分或
+曲面作图。
+[X,Y] = meshgrid(x) %等价于[X,Y]=meshgrid(x,x)。
+[X,Y,Z] = meshgrid(x,y,z) %生成三维阵列X,Y,Z，用于计算三元函数v=f(x,y,z)或三维容积图。
+
+例7 
+1.	[X,Y] = meshgrid(1:3,10:14)
+复制代码
+计算结果为： 
+1.	X =
+2.	1 2 3
+3.	1 2 3
+4.	1 2 3
+5.	1 2 3
+6.	1 2 3
+7.	Y =
+8.	10 10 10
+9.	11 11 11
+10.	12 12 12
+11.	13 13 13
+12.	14 14 14
+复制代码
+命令9 ndgrid功能 生成用于多维函数计算或多维插值用的阵列
+格式 [X1,X2,…,Xn] = ndgrid(x1,x2,…,xn) %把通过向量x1,x2,x3…,xn 指定的区域转换为数组x1,x2,x3,…,xn 。这样， 得到了 length(x1)*length(x2)*…*length(xn)个点，这些点的第一维坐标用矩阵X1 表
+示，X1 的每个第一维向量与向量x1 相同；这些点的第二维坐标用矩阵X2 表示，X2 的每个第二维向量与向量x2 相同；如此等等。
+其中X1,X2,…,Xn 可用于计算多元函数y=f(x1,x2,…,xn)以及多维插值命令用到的阵列。
+[X1,X2,…,Xn] = ndgrid(x) %等价于[X1,X2,…,Xn] = ndgrid(x,x,…,x)
+
+命令10 table1
+功能 一维查表
+格式 Y = table1(TAB,X0) %返回用表格矩阵TAB 中的行线性插值元素，对X0（TAB的第一列查找X0）进行线性插值得到的结果Y。矩阵TAB 是第一列包含
+关键值，而其他列包含数据的矩阵。X0 中的每一元素将相应地返回一线性插值行向量。矩阵TAB 的第一列必须是单调的。
+
+例8 
+1.	
+2.	>>tab = [(1:4)' hilb(4)]
+3.	>>y = table1(tab,[1 2.3 3.6 4])
+复制代码
+查表结果为： 
+1.	
+2.	>>tab = [(1:4)' hilb(4)]
+3.	>>y = table1(tab,[1 2.3 3.6 4])
+复制代码
+
