@@ -1,0 +1,7 @@
+tic和toc用来记录matlab命令执行的时间。
+   tic用来保存当前时间，而后使用toc来记录程序完成时间。
+   两者往往结合使用，用法如下：
+   tic
+   operations
+   toc
+   显示时间单位：秒
