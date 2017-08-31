@@ -1,31 +1,53 @@
 Matlab中插值函数汇总和使用说明
-本文来自: MATLAB爱好者论坛 作者: admin 日期: 2009-5-31 12:29 阅读: 3783 人 打印 收藏 
-Matlab, 插值, 函数, 汇总
+
 命令1 interp1
-功能 一维数据插值（表格查找）。该命令对数据点之间计算内插值。它找出一元函数f(x)在中间点的数值。其中函数f(x)由所给数据决定。
+功能 一维数据插值（表格查找）。
+该命令对数据点之间计算内插值。
+它找出一元函数f(x)在中间点的数值。
+其中函数f(x)由所给数据决定。
 x：原始数据点
 Y：原始数据点
 xi：插值点
 Yi：插值点
 格式
+
 (1)yi = interp1(x,Y,xi) 
-返回插值向量yi，每一元素对应于参量xi，同时由向量x 与Y 的内插值决定。参量x 指定数据Y 的点。
-若Y 为一矩阵，则按Y 的每列计算。yi 是阶数为length(xi)*size(Y,2)的输出矩阵。
+返回插值向量yi，每一元素对应于参量xi，
+同时由向量x 与Y 的内插值决定。
+参量x 指定数据Y 的点。
+若Y 为一矩阵，则按Y 的每列计算。
+yi 是阶数为length(xi)*size(Y,2)的输出矩阵。
+
 (2)yi = interp1(Y,xi) 
 假定x=1:N，其中N 为向量Y 的长度，或者为矩阵Y 的行数。
+
 (3)yi = interp1(x,Y,xi,method) 
 用指定的算法计算插值：
 ’nearest’：最近邻点插值，直接完成计算；
 ’linear’：线性插值（缺省方式），直接完成计算；
-’spline’：三次样条函数插值。对于该方法，命令interp1 调用函数spline、ppval、mkpp、umkpp。这些命令生成一系列用于分段多项式操作的函数。命令spline 用它们执行三次样条函数插值；
-’pchip’：分段三次Hermite 插值。对于该方法，命令interp1 调用函数pchip，用于对向量x 与y 执行分段三次内插值。该方法保留单调性与数据的外形；
+’spline’：三次样条函数插值。对于该方法，
+命令interp1 
+调用函数spline、ppval、mkpp、umkpp。
+这些命令生成一系列用于分段多项式操作的函数。
+命令s
+pline 用它们执行三次样条函数插值；
+’pchip’：分段三次Hermite 插值。
+对于该方法，命令interp1 调用函数pchip，
+用于对向量x 与y 执行分段三次内插值。
+该方法保留单调性与数据的外形；
 ’cubic’：与’pchip’操作相同；
 ’v5cubic’：在MATLAB 5.0 中的三次插值。
-对于超出x 范围的xi 的分量，使用方法’nearest’、’linear’、’v5cubic’的插值算法，相应地将返回NaN。对其他的方法，interp1 将对超出的分量执行外插值算法。
+对于超出x 范围的xi 的分量，
+使用方法’nearest’、’linear’、’v5cubic’的插值算法，
+相应地将返回NaN。对其他的方法，
+interp1 将对超出的分量执行外插值算法。
+
 (4)yi = interp1(x,Y,xi,method,'extrap') 
 对于超出x 范围的xi 中的分量将执行特殊的外插值法extrap。
+
 (5)yi = interp1(x,Y,xi,method,extrapval) 
 确定超出x 范围的xi 中的分量的外插值extrapval，其值通常取NaN 或0。
+
 例1 
 1.	
 2.	>>x = 0:10; y = x.*sin(x);
@@ -47,15 +69,31 @@ Yi：插值点
 2.	p1995 =
 3.	252.9885
 复制代码
+
 命令2 interp2
 功能 二维数据内插值（表格查找）
 格式 
+
 (1)ZI = interp2(X,Y,Z,XI,YI) 
-返回矩阵ZI，其元素包含对应于参量XI 与YI（可以是向量、或同型矩阵） 的元素， 即Zi(i,j) ←[Xi(i,j),yi(i,j)]。用户可以输入行向量和列向量Xi 与Yi，此时，输出向量Zi 与矩阵meshgrid(xi,yi)是同型的。同时取决于由输入矩阵X、Y 与Z 确定的二维函数Z=f(X,Y)。参量X 与Y 必须是单调的，且相同的划分格式，就像由命令meshgrid 生成的一样。若Xi与Yi 中有在X 与Y范围之外的点，则相应地返回nan（Not a Number）。
+返回矩阵ZI，其元素包含对应于参量XI 与YI（可以是向量、或同型矩阵） 的元素，
+ 即Zi(i,j) ←[Xi(i,j),yi(i,j)]。
+ 用户可以输入行向量和列向量Xi 与Yi，
+ 此时，输出向量Zi 与矩阵meshgrid(xi,yi)是同型的。
+ 同时取决于由输入矩阵X、Y 与Z 确定的二维函数Z=f(X,Y)。
+ 参量X 与Y 必须是单调的，且相同的划分格式，
+ 就像由命令meshgrid 生成的一样。
+ 若Xi与Yi 中有在X 与Y范围之外的点，
+ 则相应地返回nan（Not a Number）。
+ 
 (2)ZI = interp2(Z,XI,YI) 
-缺省地，X=1:n、Y=1:m，其中[m,n]=size(Z)。再按第一种情形进行计算。
+缺省地，X=1:n、Y=1:m，其中[m,n]=size(Z)。
+再按第一种情形进行计算。
+
 (3)ZI = interp2(Z,n) 
-作n 次递归计算，在Z 的每两个元素之间插入它们的二维插值，这样，Z 的阶数将不断增加。interp2(Z)等价于interp2(z,1)。
+作n 次递归计算，在Z 的每两个元素之间插入它们的二维插值，
+这样，Z 的阶数将不断增加。
+interp2(Z)等价于interp2(z,1)。
+
 (4)ZI = interp2(X,Y,Z,XI,YI,method) 
 用指定的算法method 计算二维插值：
 ’linear’：双线性插值算法（缺省算法）；
